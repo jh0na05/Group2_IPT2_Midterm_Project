@@ -1,19 +1,35 @@
 <?php
   include('partials\header.php');
   include('partials\sidebar.php');
+  include('database\database.php');
 
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
   // Your PHP BACK CODE HERE
+  
 
+  // END OF YOUR PHP BACK CODE
 ?>
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Employee Information Management System</h1>
+      <h1>Movies System</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+          <li class="breadcrumb-item"><a href="index.php">Movies</a></li>
           <li class="breadcrumb-item">Tables</li>
           <li class="breadcrumb-item active">General</li>
         </ol>
@@ -31,7 +47,7 @@
                   <h5 class="card-title">Default Table</h5>
                 </div>
                 <div>
-                  <button class="btn btn-primary btn-sm mt-4 mx-3">Add Employee</button>
+                  <button class="btn btn-primary btn-sm mt-4 mx-3">Add Movies</button>
                 </div>
               </div>
 
@@ -40,20 +56,20 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Position</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Address</th>
+                    <th scope="col">Movie_title</th>
+                    <th scope="col">Release_date</th>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Director</th>
                     <th scope="col" class="text-center">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <th scope="row">1</th>
-                    <td>Brandon Jacob</td>
-                    <td>Designer</td>
-                    <td>28</td>
-                    <td>2016-05-25</td>
+                    <td>John Wick</td>
+                    <td>2014-10-29</td>
+                    <td>Action</td>
+                    <td>10</td>
                     <td class="d-flex justify-content-center">
                       <button class="btn btn-success btn-sm mx-1">Edit</button>
                       <button class="btn btn-primary btn-sm mx-1" title="View Employee Information" data-bs-toggle="modal" data-bs-target="#editInfo">View</button>
@@ -109,7 +125,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">1</th>
+                    <th scope="row">6</th>
                     <td>Brandon Jacob</td>
                     <td>Designer</td>
                     <td>28</td>
@@ -121,7 +137,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">2</th>
+                    <th scope="row">7</th>
                     <td>Bridie Kessler</td>
                     <td>Developer</td>
                     <td>35</td>
@@ -133,7 +149,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">3</th>
+                    <th scope="row">8</th>
                     <td>Ashleigh Langosh</td>
                     <td>Finance</td>
                     <td>45</td>
@@ -145,7 +161,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">4</th>
+                    <th scope="row">9</th>
                     <td>Angus Grady</td>
                     <td>HR</td>
                     <td>34</td>
@@ -157,7 +173,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">5</th>
+                    <th scope="row">10</th>
                     <td>Raheem Lehner</td>
                     <td>Dynamic Division Officer</td>
                     <td>47</td>
