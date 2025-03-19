@@ -1,20 +1,27 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include('database.php');
 
-if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id = $_POST['id'];
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $id = intval($_GET['id']);
 
-    $sql = "DELETE FROM movies WHERE id = $id";
-
-    if(mysqli_query($conn, $sql)) {
-        $_SESSION['success'] = 'Movie deleted successfully';
+    $stmt = $conn->prepare("DELETE FROM movie_list WHERE id = ?");
+    if ($stmt) {
+        $stmt->bind_param("i", $id);
+        if ($stmt->execute()) {
+            $_SESSION['status'] = 'deleted';
+        } else {
+            $_SESSION['status'] = 'error';
+        }
+        $stmt->close();
     } else {
-        $_SESSION['error'] = 'Something went wrong. ' . $conn->error;
+        $_SESSION['status'] = 'error';
     }
-    mysqli_close($conn);
-    header("Location: ../index.php");
+
+    //  Redirect to the correct page
+    header('Location: ../index.php'); 
     exit();
 }
-
 ?>
