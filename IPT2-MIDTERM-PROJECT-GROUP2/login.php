@@ -59,12 +59,20 @@
 
                 <div class="card-body">
 
+                  <?php
+                  session_start();
+                  if (isset($_SESSION['login_error'])) {
+                      echo '<div class="alert alert-danger">' . $_SESSION['login_error'] . '</div>';
+                      unset($_SESSION['login_error']);
+                  }
+                  ?>
+
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
                     <p class="text-center small">Enter your username & password to login</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
+                  <form class="row g-3 needs-validation" action="process_login.php" method="POST" novalidate>
 
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Username</label>
@@ -91,7 +99,7 @@
                       <button class="btn btn-primary w-100" type="submit">Login</button>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">Don't have account? <a href="pages-register.html">Create an account</a></p>
+                      <p class="small mb-0">Don't have account? <a href="register.php">Create an account</a></p>
                     </div>
                   </form>
 
@@ -132,4 +140,5 @@
 
 </body>
 
-</html>
+</html> 
+fonts.gstatic.com

@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include('database.php'); // Ensure this file correctly establishes $conn
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

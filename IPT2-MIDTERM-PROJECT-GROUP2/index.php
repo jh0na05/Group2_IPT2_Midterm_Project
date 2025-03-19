@@ -6,6 +6,9 @@ include('database\database.php');
 include('database\create.php');
 include('database\update.php');
 include('database\delete.php');
+include('database\login.php');
+include('database\login_process.php');
+include('database\register.php');
 
 $status = '';
 if (isset($_SESSION['status'])) {
