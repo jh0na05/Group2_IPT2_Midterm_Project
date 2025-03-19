@@ -1,24 +1,42 @@
 <?php
-session_start();
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 include('database.php');
 
-if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id = $_POST['id'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $id = $_POST['id']; // Get the movie ID
     $movie_title = $_POST['movie_title'];
     $release_date = $_POST['release_date'];
     $genre = $_POST['genre'];
     $director = $_POST['director'];
 
-    $sql = "UPDATE movies SET movie_title = '$movie_title', release_date = '$release_date', genre = '$genre', director = '$director' WHERE id = $id";
+    // Corrected SQL query with placeholders
+    $sql = "UPDATE movie_list
+            SET movie_title = ?, release_date = ?, genre = ?, director = ?
+            WHERE id = ?";
 
-    if(mysqli_query($conn, $sql)) {
-        $_SESSION['success'] = 'Movie updated successfully';
-        header('Location: ../index.php');
+    $stmt = $conn->prepare($sql);
+    if ($stmt) {
+        // Corrected bind_param with appropriate data types
+        $stmt->bind_param('ssssi', $movie_title, $release_date, $genre, $director, $id);
+
+        if ($stmt->execute()) {
+            $_SESSION['status'] = 'updated';
+        } else {
+            $_SESSION['status'] = 'error';
+            error_log("Update Error: " . $stmt->error);
+        }
+        $stmt->close();
     } else {
-        $_SESSION['error'] = 'Something went wrong. ' . $conn->error;
+        $_SESSION['status'] = 'error';
+        error_log("Prepare Error: " . $conn->error);
     }
-    mysqli_close($conn);
-    header("Location: ../index.php");
+
+    header('Location: ../index.php');
     exit();
 }
 ?>
