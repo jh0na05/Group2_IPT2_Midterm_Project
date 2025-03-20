@@ -6,9 +6,7 @@ include('database\database.php');
 include('database\create.php');
 include('database\update.php');
 include('database\delete.php');
-include('database\login.php');
-include('database\login_process.php');
-include('database\register.php');
+
 
 $status = '';
 if (isset($_SESSION['status'])) {
@@ -484,28 +482,44 @@ $total_pages = ceil($total_records / $records_per_page);
 
           <!-- End OF Table Modal and alert -->
 
-          <!-- Pagination -->
+          <?php
+          // Get the current page number and sanitize input
+          $current_page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+
+          // Example: Total pages (Replace this with a database query result)
+          $total_pages = 10;
+
+          // Hide pagination if there's only one page
+          if ($total_pages > 1): 
+          ?>
           <div class="mx-4">
-            <nav aria-label="Page navigation example">
+            <nav aria-label="Page navigation">
               <ul class="pagination">
-                <li class="page-item <?php if ($current_page <= 1) echo 'disabled'; ?>">
-                  <a class="page-link" href="?page=<?php echo $current_page - 1; ?>">Previous</a>
+
+                <!-- Previous Button -->
+                <li class="page-item <?= ($current_page <= 1) ? 'disabled' : ''; ?>">
+                  <a class="page-link" href="?page=<?= max(1, $current_page - 1); ?>">Previous</a>
                 </li>
+
+                <!-- Page Numbers -->
                 <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                  <li class="page-item <?php if ($i == $current_page) echo 'active'; ?>">
-                    <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                  <li class="page-item <?= ($i == $current_page) ? 'active' : ''; ?>">
+                    <a class="page-link" href="?page=<?= $i; ?>" <?= ($i == $current_page) ? 'aria-current="page"' : ''; ?>>
+                      <?= $i; ?>
+                    </a>
                   </li>
                 <?php endfor; ?>
-                <li class="page-item <?php if ($current_page >= $total_pages) echo 'disabled'; ?>">
-                  <a class="page-link" href="?page=<?php echo $current_page + 1; ?>">Next</a>
+
+                <!-- Next Button -->
+                <li class="page-item <?= ($current_page >= $total_pages) ? 'disabled' : ''; ?>">
+                  <a class="page-link" href="?page=<?= min($total_pages, $current_page + 1); ?>">Next</a>
                 </li>
+
               </ul>
             </nav>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
+          <?php endif; ?>
+          
 </section>
 </main><!-- End #main -->
 
