@@ -1231,3 +1231,22 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
+
+.custom-btn {
+  background-color: #007bff; /* Primary color */
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.custom-btn:hover {
+  background-color: #0056b3; /* Darker blue */
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+.custom-btn:disabled {
+  background-color: #cccccc; /* Gray for disabled state */
+  cursor: not-allowed;
+  transform: none;
+}
+
